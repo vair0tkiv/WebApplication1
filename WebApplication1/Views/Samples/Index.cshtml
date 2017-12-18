@@ -1,0 +1,101 @@
+﻿@using WebApplication1.ViewModels;
+@model SamplesViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Samples</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="get">
+        <div class="form-inline">
+            <label class="control-label">Material: </label>
+            @Html.TextBox("material", Model.FilterViewModel.SelectedMaterial, htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">Mass: </label>
+            @Html.TextBox("mass", Model.FilterViewModel.SelectedMass,
+                    htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">Property: </label>
+            @Html.TextBox("property", Model.FilterViewModel.SelectedProperty, htmlAttributes: new { @class = "form-control" })
+
+            <input type="submit" value="Filter" class="btn btn-default" />
+        </div>
+    </form>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.NameSampleAscSort)"
+                       asp-route-material="@(Model.FilterViewModel.SelectedMaterial)"
+                       asp-route-mass="@(Model.FilterViewModel.SelectedMass)"
+                       asp-route-property="@(Model.FilterViewModel.SelectedProperty)">NameSample</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.MassSampleAscSort)"
+                       asp-route-material="@(Model.FilterViewModel.SelectedMaterial)"
+                       asp-route-mass="@(Model.FilterViewModel.SelectedMass)"
+                       asp-route-property="@(Model.FilterViewModel.SelectedProperty)">MassSample</a>
+                </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.IdMaterialAscSort)"
+                   asp-route-material="@(Model.FilterViewModel.SelectedMaterial)"
+                   asp-route-mass="@(Model.FilterViewModel.SelectedMass)"
+                   asp-route-property="@(Model.FilterViewModel.SelectedProperty)">IdMaterial</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Samples) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameSample)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MassSample)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdMaterialNavigation.NameMaterial)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdSample">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdSample">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdSample">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       asp-route-material="@(Model.FilterViewModel.SelectedMaterial)"
+       asp-route-mass="@(Model.FilterViewModel.SelectedMass)"
+       asp-route-property=" @(Model.FilterViewModel.SelectedProperty)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)"
+       class="btn btn-default btn">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       asp-route-material="@(Model.FilterViewModel.SelectedMaterial)"
+       asp-route-mass="@(Model.FilterViewModel.SelectedMass)"
+       asp-route-property=" @(Model.FilterViewModel.SelectedProperty)"
+      asp-route-sortorder="@(Model.SortViewModel.Current)"
+       class="btn btn-default btn">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}

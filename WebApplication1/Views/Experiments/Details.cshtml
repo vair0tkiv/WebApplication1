@@ -1,0 +1,69 @@
+﻿@model WebApplication1.Experiments
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Experiments</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdExperiment)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dates)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dates)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SupposeMass)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SupposeMass)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiveMass)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReceiveMass)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdLaboratoryNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdLaboratoryNavigation.IdLaboratory)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdSampleNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdSampleNavigation.IdSample)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdWorkerNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdWorkerNavigation.IdWorker)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdExperiment">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

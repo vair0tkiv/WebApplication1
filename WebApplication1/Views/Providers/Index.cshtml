@@ -1,0 +1,121 @@
+﻿@using WebApplication1.ViewModels;
+@model ProvidersViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Providers</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="get">
+        <div class="form-inline">
+            <label class="control-label">Surname: </label>
+            @Html.TextBox("surname", Model.FilterViewModel.SelectedSurname, htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">Firstname: </label>
+            @Html.TextBox("firstname", Model.FilterViewModel.SelectedFirstname,
+                    htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">Adress: </label>
+            @Html.TextBox("adress", Model.FilterViewModel.SelectedAdress, htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">Birthday: </label>
+            @Html.TextBox("birthday", Model.FilterViewModel.SelectedBirthday, htmlAttributes: new { @class = "form-control" })
+
+            <input type="submit" value="Filter" class="btn btn-default" />
+        </div>
+    </form>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.SurnameAscSort)"
+                       asp-route-surname="@(Model.FilterViewModel.SelectedSurname)"
+                       asp-route-firstname="@(Model.FilterViewModel.SelectedFirstname)"
+                       asp-route-adress="@(Model.FilterViewModel.SelectedAdress)"
+                       asp-route-birthday="@(Model.FilterViewModel.SelectedBirthday)">Surname</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.FirstnameAscSort)"
+                       asp-route-surname="@(Model.FilterViewModel.SelectedSurname)"
+                       asp-route-firstname="@(Model.FilterViewModel.SelectedFirstname)"
+                       asp-route-adress="@(Model.FilterViewModel.SelectedAdress)"
+                       asp-route-birthday="@(Model.FilterViewModel.SelectedBirthday)">Firstname</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.AdressAscSort)"
+                       asp-route-surname="@(Model.FilterViewModel.SelectedSurname)"
+                       asp-route-firstname="@(Model.FilterViewModel.SelectedFirstname)"
+                       asp-route-adress="@(Model.FilterViewModel.SelectedAdress)"
+                       asp-route-birthday="@(Model.FilterViewModel.SelectedBirthday)">Adress</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.BirthdayAscSort)"
+                       asp-route-surname="@(Model.FilterViewModel.SelectedSurname)"
+                       asp-route-firstname="@(Model.FilterViewModel.SelectedFirstname)"
+                       asp-route-adress="@(Model.FilterViewModel.SelectedAdress)"
+                       asp-route-birthday="@(Model.FilterViewModel.SelectedBirthday)">Birthday</a>
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Providers) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Birthday)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdProvider">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdProvider">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdProvider">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       asp-route-surname="@(Model.FilterViewModel.SelectedSurname)"
+       asp-route-firstname="@(Model.FilterViewModel.SelectedFirstname)"
+       asp-route-adress=" @(Model.FilterViewModel.SelectedBirthday)"
+       asp-route-birthday="@(Model.FilterViewModel.SelectedAdress)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)" 
+       class="btn btn-default btn">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       asp-route-surname="@(Model.FilterViewModel.SelectedSurname)"
+       asp-route-firstname="@(Model.FilterViewModel.SelectedFirstname)"
+       asp-route-adress=" @(Model.FilterViewModel.SelectedBirthday)"
+       asp-route-birthday="@(Model.FilterViewModel.SelectedAdress)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)" 
+       class="btn btn-default btn">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}
+

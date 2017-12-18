@@ -1,0 +1,244 @@
+﻿@using WebApplication1.ViewModels;
+@model ExperimentsViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Experiments</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">NumberExperiment: </label>
+        @Html.TextBox("idexperiment", Model.FilterViewModel.SelectedIdExperiment, htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">NameSample: </label>
+        @Html.TextBox("namesample", Model.FilterViewModel.SelectedIdSample, htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">Dates: </label>
+        @Html.TextBox("dates", Model.FilterViewModel.SelectedDates, htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">StartTime: </label>
+        @Html.TextBox("starttime", Model.FilterViewModel.SelectedStartTime, htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">EndTime: </label>
+        @Html.TextBox("endtime", Model.FilterViewModel.SelectedEndTime, htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">SupposeMass: </label>
+        @Html.TextBox("supposemass", Model.FilterViewModel.SelectedSupposeMass, htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">ReceiveMass: </label>
+        @Html.TextBox("receivemass", Model.FilterViewModel.SelectedReceiveMass, htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">NumberLaboratory: </label>
+        @Html.TextBox("numberlaboratory", Model.FilterViewModel.SelectedIdLaboratory, htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">Surname: </label>
+        @Html.TextBox("surname", Model.FilterViewModel.SelectedIdWorker, htmlAttributes: new { @class = "form-control" })
+
+        <input style="background-color:darksalmon" type="submit" value="Filter" class="btn btn-default" />
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.IdExperimentAscSort)"
+                       asp-route-idexperiment="@(Model.FilterViewModel.SelectedIdExperiment)"
+                       asp-route-idsample="@(Model.FilterViewModel.SelectedIdSample)"
+                       asp-route-dates="@(Model.FilterViewModel.SelectedDates)"
+                       asp-route-starttime="@(Model.FilterViewModel.SelectedStartTime)"
+                       asp-route-endtime="@(Model.FilterViewModel.SelectedEndTime)"
+                       asp-route-supposemass="@(Model.FilterViewModel.SelectedSupposeMass)"
+                       asp-route-receivemass="@(Model.FilterViewModel.SelectedReceiveMass)"
+                       asp-route-idlaboratory="@(Model.FilterViewModel.SelectedIdLaboratory)"
+                       asp-route-idworker="@(Model.FilterViewModel.SelectedIdWorker)">Experiment</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.IdSampleAscSort)"
+                       asp-route-idexperiment="@(Model.FilterViewModel.SelectedIdExperiment)"
+                       asp-route-idsample="@(Model.FilterViewModel.SelectedIdSample)"
+                       asp-route-dates="@(Model.FilterViewModel.SelectedDates)"
+                       asp-route-starttime="@(Model.FilterViewModel.SelectedStartTime)"
+                       asp-route-endtime="@(Model.FilterViewModel.SelectedEndTime)"
+                       asp-route-supposemass="@(Model.FilterViewModel.SelectedSupposeMass)"
+                       asp-route-receivemass="@(Model.FilterViewModel.SelectedReceiveMass)"
+                       asp-route-idlaboratory="@(Model.FilterViewModel.SelectedIdLaboratory)"
+                       asp-route-idworker="@(Model.FilterViewModel.SelectedIdWorker)">NameSample</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.DatesAscSort)"
+                       asp-route-idexperiment="@(Model.FilterViewModel.SelectedIdExperiment)"
+                       asp-route-idsample="@(Model.FilterViewModel.SelectedIdSample)"
+                       asp-route-dates="@(Model.FilterViewModel.SelectedDates)"
+                       asp-route-starttime="@(Model.FilterViewModel.SelectedStartTime)"
+                       asp-route-endtime="@(Model.FilterViewModel.SelectedEndTime)"
+                       asp-route-supposemass="@(Model.FilterViewModel.SelectedSupposeMass)"
+                       asp-route-receivemass="@(Model.FilterViewModel.SelectedReceiveMass)"
+                       asp-route-idlaboratory="@(Model.FilterViewModel.SelectedIdLaboratory)"
+                       asp-route-idworker="@(Model.FilterViewModel.SelectedIdWorker)">Dates</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.StartTimeAscSort)"
+                       asp-route-idexperiment="@(Model.FilterViewModel.SelectedIdExperiment)"
+                       asp-route-idsample="@(Model.FilterViewModel.SelectedIdSample)"
+                       asp-route-dates="@(Model.FilterViewModel.SelectedDates)"
+                       asp-route-starttime="@(Model.FilterViewModel.SelectedStartTime)"
+                       asp-route-endtime="@(Model.FilterViewModel.SelectedEndTime)"
+                       asp-route-supposemass="@(Model.FilterViewModel.SelectedSupposeMass)"
+                       asp-route-receivemass="@(Model.FilterViewModel.SelectedReceiveMass)"
+                       asp-route-idlaboratory="@(Model.FilterViewModel.SelectedIdLaboratory)"
+                       asp-route-idworker="@(Model.FilterViewModel.SelectedIdWorker)">StartTime</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.EndTimeAscSort)"
+                       asp-route-idexperiment="@(Model.FilterViewModel.SelectedIdExperiment)"
+                       asp-route-idsample="@(Model.FilterViewModel.SelectedIdSample)"
+                       asp-route-dates="@(Model.FilterViewModel.SelectedDates)"
+                       asp-route-starttime="@(Model.FilterViewModel.SelectedStartTime)"
+                       asp-route-endtime="@(Model.FilterViewModel.SelectedEndTime)"
+                       asp-route-supposemass="@(Model.FilterViewModel.SelectedSupposeMass)"
+                       asp-route-receivemass="@(Model.FilterViewModel.SelectedReceiveMass)"
+                       asp-route-idlaboratory="@(Model.FilterViewModel.SelectedIdLaboratory)"
+                       asp-route-idworker="@(Model.FilterViewModel.SelectedIdWorker)">EndTime</a>
+                </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.SupposeMassAscSort)"
+                   asp-route-idexperiment="@(Model.FilterViewModel.SelectedIdExperiment)"
+                   asp-route-idsample="@(Model.FilterViewModel.SelectedIdSample)"
+                   asp-route-dates="@(Model.FilterViewModel.SelectedDates)"
+                   asp-route-starttime="@(Model.FilterViewModel.SelectedStartTime)"
+                   asp-route-endtime="@(Model.FilterViewModel.SelectedEndTime)"
+                   asp-route-supposemass="@(Model.FilterViewModel.SelectedSupposeMass)"
+                   asp-route-receivemass="@(Model.FilterViewModel.SelectedReceiveMass)"
+                   asp-route-idlaboratory="@(Model.FilterViewModel.SelectedIdLaboratory)"
+                   asp-route-idworker="@(Model.FilterViewModel.SelectedIdWorker)">SupposeMass</a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.ReceiveMassAscSort)"
+                   asp-route-idexperiment="@(Model.FilterViewModel.SelectedIdExperiment)"
+                   asp-route-idsample="@(Model.FilterViewModel.SelectedIdSample)"
+                   asp-route-dates="@(Model.FilterViewModel.SelectedDates)"
+                   asp-route-starttime="@(Model.FilterViewModel.SelectedStartTime)"
+                   asp-route-endtime="@(Model.FilterViewModel.SelectedEndTime)"
+                   asp-route-supposemass="@(Model.FilterViewModel.SelectedSupposeMass)"
+                   asp-route-receivemass="@(Model.FilterViewModel.SelectedReceiveMass)"
+                   asp-route-idlaboratory="@(Model.FilterViewModel.SelectedIdLaboratory)"
+                   asp-route-idworker="@(Model.FilterViewModel.SelectedIdWorker)">ReceiveMass</a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.IdLaboratoryAscSort)"
+                   asp-route-idexperiment="@(Model.FilterViewModel.SelectedIdExperiment)"
+                   asp-route-idsample="@(Model.FilterViewModel.SelectedIdSample)"
+                   asp-route-dates="@(Model.FilterViewModel.SelectedDates)"
+                   asp-route-starttime="@(Model.FilterViewModel.SelectedStartTime)"
+                   asp-route-endtime="@(Model.FilterViewModel.SelectedEndTime)"
+                   asp-route-supposemass="@(Model.FilterViewModel.SelectedSupposeMass)"
+                   asp-route-receivemass="@(Model.FilterViewModel.SelectedReceiveMass)"
+                   asp-route-idlaboratory="@(Model.FilterViewModel.SelectedIdLaboratory)"
+                   asp-route-idworker="@(Model.FilterViewModel.SelectedIdWorker)">Laboratory</a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.IdWorkerAscSort)"
+                   asp-route-idexperiment="@(Model.FilterViewModel.SelectedIdExperiment)"
+                   asp-route-idsample="@(Model.FilterViewModel.SelectedIdSample)"
+                   asp-route-dates="@(Model.FilterViewModel.SelectedDates)"
+                   asp-route-starttime="@(Model.FilterViewModel.SelectedStartTime)"
+                   asp-route-endtime="@(Model.FilterViewModel.SelectedEndTime)"
+                   asp-route-supposemass="@(Model.FilterViewModel.SelectedSupposeMass)"
+                   asp-route-receivemass="@(Model.FilterViewModel.SelectedReceiveMass)"
+                   asp-route-idlaboratory="@(Model.FilterViewModel.SelectedIdLaboratory)"
+                   asp-route-idworker="@(Model.FilterViewModel.SelectedIdWorker)">Worker</a>
+             </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Experiments) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdExperiment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdSampleNavigation.NameSample)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dates)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupposeMass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiveMass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLaboratoryNavigation.NumberLaboratory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdWorkerNavigation.Surname)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdExperiment">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdExperiment">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdExperiment">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+        asp-route-idexperiment="@(Model.FilterViewModel.SelectedIdExperiment)"
+        asp-route-idsample="@(Model.FilterViewModel.SelectedIdSample)"
+        asp-route-dates="@(Model.FilterViewModel.SelectedDates)"
+        asp-route-starttime="@(Model.FilterViewModel.SelectedStartTime)"
+        asp-route-endtime="@(Model.FilterViewModel.SelectedEndTime)"
+        asp-route-supposemass="@(Model.FilterViewModel.SelectedSupposeMass)"
+        asp-route-receivemass="@(Model.FilterViewModel.SelectedReceiveMass)"
+        asp-route-idlaboratory="@(Model.FilterViewModel.SelectedIdLaboratory)"
+        asp-route-idworker="@(Model.FilterViewModel.SelectedIdWorker)"
+        asp-route-sortorder="@(Model.SortViewModel.Current)"
+       class="btn btn-default btn">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       asp-route-idexperiment="@(Model.FilterViewModel.SelectedIdExperiment)"
+        asp-route-idsample="@(Model.FilterViewModel.SelectedIdSample)"
+        asp-route-dates="@(Model.FilterViewModel.SelectedDates)"
+        asp-route-starttime="@(Model.FilterViewModel.SelectedStartTime)"
+        asp-route-endtime="@(Model.FilterViewModel.SelectedEndTime)"
+        asp-route-supposemass="@(Model.FilterViewModel.SelectedSupposeMass)"
+        asp-route-receivemass="@(Model.FilterViewModel.SelectedReceiveMass)"
+        asp-route-idlaboratory="@(Model.FilterViewModel.SelectedIdLaboratory)"
+        asp-route-idworker="@(Model.FilterViewModel.SelectedIdWorker)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)"
+       class="btn btn-default btn">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}

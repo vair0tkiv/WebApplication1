@@ -1,0 +1,83 @@
+﻿@using WebApplication1.ViewModels;
+@model EquipmentsViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Equipments</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">NameEquipment: </label>
+        @Html.TextBox("nameequipment", Model.FilterViewModel.SelectedNameEquipment, htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">DateRelease: </label>
+        @Html.TextBox("daterelease", Model.FilterViewModel.SelectedDateRelease, htmlAttributes: new { @class = "form-control" })
+
+        <input type="submit" value="Filter" class="btn btn-default" />
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.NameEquipmentAscSort)"
+                       asp-route-nameequipment="@(Model.FilterViewModel.SelectedNameEquipment)"
+                       asp-route-daterelease="@(Model.FilterViewModel.SelectedDateRelease)">NameEquipment</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.DateReleaseAscSort)"
+                       asp-route-nameequipment="@(Model.FilterViewModel.SelectedNameEquipment)"
+                       asp-route-daterelease="@(Model.FilterViewModel.SelectedDateRelease)">DateRelease</a>
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Equipments) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameEquipment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateRelease)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdEquipment">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdEquipment">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdEquipment">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       asp-route-nameequipment="@(Model.FilterViewModel.SelectedNameEquipment)"
+       asp-route-daterelease="@(Model.FilterViewModel.SelectedDateRelease)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)" 
+       class="btn btn-default btn">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       asp-route-nameequipment="@(Model.FilterViewModel.SelectedNameEquipment)"
+       asp-route-daterelease="@(Model.FilterViewModel.SelectedDateRelease)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)" 
+       class="btn btn-default btn">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}

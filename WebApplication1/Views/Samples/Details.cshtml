@@ -1,0 +1,36 @@
+﻿@model WebApplication1.Samples
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Samples</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NameSample)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NameSample)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MassSample)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MassSample)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdMaterialNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdMaterialNavigation.IdMaterial)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdSample">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

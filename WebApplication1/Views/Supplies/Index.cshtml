@@ -1,0 +1,148 @@
+﻿@using WebApplication1.ViewModels;
+@model SuppliesViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Supplies</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="get">
+        <div class="form-inline">
+            <label class="control-label">DateSupple: </label>
+            @Html.TextBox("datesupple", Model.FilterViewModel.SelectedDateSupple, htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">StartDate: </label>
+            @Html.TextBox("startdate", Model.FilterViewModel.SelectedStartDate, htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">EndDate: </label>
+            @Html.TextBox("enddate", Model.FilterViewModel.SelectedEndDate, htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">NameMaterial: </label>
+            @Html.TextBox("namematerial", Model.FilterViewModel.SelectedNameMaterial, htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">MassMaterial: </label>
+            @Html.TextBox("massmaterial", Model.FilterViewModel.SelectedMassMaterial, htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">Price: </label>
+            @Html.TextBox("price", Model.FilterViewModel.SelectedPrice, htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">Surname: </label>
+            @Html.TextBox("surname", Model.FilterViewModel.SelectedIdProvider, htmlAttributes: new { @class = "form-control" })
+
+            <input type="submit" value="Filter" class="btn btn-default" />
+        </div>
+    </form>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.PriceAscSort)"
+                       asp-route-datesupple="@(Model.FilterViewModel.SelectedDateSupple)"
+                       asp-route-startdate="@(Model.FilterViewModel.SelectedStartDate)"
+                       asp-route-enddate="@(Model.FilterViewModel.SelectedEndDate)"
+                       asp-route-namematerial="@(Model.FilterViewModel.SelectedNameMaterial)"
+                       asp-route-massmaterial="@(Model.FilterViewModel.SelectedMassMaterial)"
+                       asp-route-price="@(Model.FilterViewModel.SelectedPrice)"
+                       asp-route-idproviders="@(Model.FilterViewModel.SelectedIdProvider)">Price</a>
+                
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.DateSuppleAscSort)"
+                       asp-route-datesupple="@(Model.FilterViewModel.SelectedDateSupple)"
+                       asp-route-startdate="@(Model.FilterViewModel.SelectedStartDate)"
+                       asp-route-enddate="@(Model.FilterViewModel.SelectedEndDate)"
+                       asp-route-namematerial="@(Model.FilterViewModel.SelectedNameMaterial)"
+                       asp-route-massmaterial="@(Model.FilterViewModel.SelectedMassMaterial)"
+                       asp-route-price="@(Model.FilterViewModel.SelectedPrice)"
+                       asp-route-idproviders="@(Model.FilterViewModel.SelectedIdProvider)">DateSupple</a>
+                </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.IdMaterialAscSort)"
+                   asp-route-datesupple="@(Model.FilterViewModel.SelectedDateSupple)"
+                   asp-route-startdate="@(Model.FilterViewModel.SelectedStartDate)"
+                   asp-route-enddate="@(Model.FilterViewModel.SelectedEndDate)"
+                   asp-route-namematerial="@(Model.FilterViewModel.SelectedNameMaterial)"
+                   asp-route-massmaterial="@(Model.FilterViewModel.SelectedMassMaterial)"
+                   asp-route-price="@(Model.FilterViewModel.SelectedPrice)"
+                   asp-route-idproviders="@(Model.FilterViewModel.SelectedIdProvider)">IdMaterial</a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.IdProviderAscSort)"
+                   asp-route-datesupple="@(Model.FilterViewModel.SelectedDateSupple)"
+                   asp-route-startdate="@(Model.FilterViewModel.SelectedStartDate)"
+                   asp-route-enddate="@(Model.FilterViewModel.SelectedEndDate)"
+                   asp-route-namematerial="@(Model.FilterViewModel.SelectedNameMaterial)"
+                   asp-route-massmaterial="@(Model.FilterViewModel.SelectedMassMaterial)"
+                   asp-route-price="@(Model.FilterViewModel.SelectedPrice)"
+                   asp-route-idproviders="@(Model.FilterViewModel.SelectedIdProvider)">IdProvider</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Supplies) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateSupple)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdMaterialNavigation.NameMaterial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProviderNavigation.Surname)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdSupple">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdSupple">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdSupple">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+        asp-route-datesupple="@(Model.FilterViewModel.SelectedDateSupple)"
+        asp-route-startdate="@(Model.FilterViewModel.SelectedStartDate)"
+        asp-route-enddate="@(Model.FilterViewModel.SelectedEndDate)"
+        asp-route-namematerial="@(Model.FilterViewModel.SelectedNameMaterial)"
+        asp-route-massmaterial="@(Model.FilterViewModel.SelectedMassMaterial)"
+        asp-route-price="@(Model.FilterViewModel.SelectedPrice)"
+        asp-route-idproviders="@(Model.FilterViewModel.SelectedIdProvider)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)" 
+       class="btn btn-default btn">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+        asp-route-datesupple="@(Model.FilterViewModel.SelectedDateSupple)"
+        asp-route-startdate="@(Model.FilterViewModel.SelectedStartDate)"
+        asp-route-enddate="@(Model.FilterViewModel.SelectedEndDate)"
+        asp-route-namematerial="@(Model.FilterViewModel.SelectedNameMaterial)"
+        asp-route-massmaterial="@(Model.FilterViewModel.SelectedMassMaterial)"
+        asp-route-price="@(Model.FilterViewModel.SelectedPrice)"
+        asp-route-idproviders="@(Model.FilterViewModel.SelectedIdProvider)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)" 
+       class="btn btn-default btn">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}
+

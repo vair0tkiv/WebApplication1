@@ -1,0 +1,84 @@
+﻿@using WebApplication1.ViewModels;
+@model LaboratoriesViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Laboratories</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="get">
+        <div class="form-inline">
+            <label class="control-label">NumberLaboratory: </label>
+            @Html.TextBox("numberlaboratory", Model.FilterViewModel.SelectedNumberLaboratory, htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">NameEquipment: </label>
+            @Html.TextBox("nameequipment", Model.FilterViewModel.SelectedIdEquipment,
+                    htmlAttributes: new { @class = "form-control" })
+
+            <input type="submit" value="Filter" class="btn btn-default" />
+        </div>
+    </form>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.NumberLaboratoryAscSort)"
+                       asp-route-numberlaboratory="@(Model.FilterViewModel.SelectedNumberLaboratory)"
+                       asp-route-idequipment="@(Model.FilterViewModel.SelectedIdEquipment)">NumberLaboratory</a>
+                </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.IdEquipmentAscSort)"
+                   asp-route-numberlaboratory="@(Model.FilterViewModel.SelectedNumberLaboratory)"
+                   asp-route-idequipment="@(Model.FilterViewModel.SelectedIdEquipment)">IdEquipment</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Laboratories) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberLaboratory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEquipmentNavigation.NameEquipment)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdLaboratory">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdLaboratory">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdLaboratory">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       asp-route-numberlaboratory="@(Model.FilterViewModel.SelectedNumberLaboratory)"
+       asp-route-idequipment="@(Model.FilterViewModel.SelectedIdEquipment)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)" 
+       class="btn btn-default btn">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       asp-route-numberlaboratory="@(Model.FilterViewModel.SelectedNumberLaboratory)"
+       asp-route-idequipment="@(Model.FilterViewModel.SelectedIdEquipment)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)" 
+       class="btn btn-default btn">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}

@@ -1,0 +1,120 @@
+﻿@using WebApplication1.ViewModels;
+@model MaterialsViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Materials</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="get">
+        <div class="form-inline">
+            <label class="control-label">NameMaterial: </label>
+            @Html.TextBox("namematerial", Model.FilterViewModel.SelectedNameMaterial, htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">MassMaterial: </label>
+            @Html.TextBox("massmaterial", Model.FilterViewModel.SelectedMassMaterial,
+                    htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">Units: </label>
+            @Html.TextBox("units", Model.FilterViewModel.SelectedUnits, htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">Property: </label>
+            @Html.TextBox("property", Model.FilterViewModel.SelectedProperty, htmlAttributes: new { @class = "form-control" })
+
+            <input type="submit" value="Filter" class="btn btn-default" />
+        </div>
+    </form>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.NameMaterialAscSort)"
+                       asp-route-namematerial="@(Model.FilterViewModel.SelectedNameMaterial)"
+                       asp-route-massmaterial="@(Model.FilterViewModel.SelectedMassMaterial)"
+                       asp-route-units="@(Model.FilterViewModel.SelectedUnits)"
+                       asp-route-property="@(Model.FilterViewModel.SelectedProperty)">NameMaterial</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.MassMaterialAscSort)"
+                       asp-route-namematerial="@(Model.FilterViewModel.SelectedNameMaterial)"
+                       asp-route-massmaterial="@(Model.FilterViewModel.SelectedMassMaterial)"
+                       asp-route-units="@(Model.FilterViewModel.SelectedUnits)"
+                       asp-route-property="@(Model.FilterViewModel.SelectedProperty)">MassMaterial</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.UnitssAscSort)"
+                       asp-route-namematerial="@(Model.FilterViewModel.SelectedNameMaterial)"
+                       asp-route-massmaterial="@(Model.FilterViewModel.SelectedMassMaterial)"
+                       asp-route-units="@(Model.FilterViewModel.SelectedUnits)"
+                       asp-route-property="@(Model.FilterViewModel.SelectedProperty)">Units</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.PropertyAscSort)"
+                       asp-route-namematerial="@(Model.FilterViewModel.SelectedNameMaterial)"
+                       asp-route-massmaterial="@(Model.FilterViewModel.SelectedMassMaterial)"
+                       asp-route-units="@(Model.FilterViewModel.SelectedUnits)"
+                       asp-route-property="@(Model.FilterViewModel.SelectedProperty)">Property</a>
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Materials) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameMaterial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MassMaterial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Units)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Property)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdMaterial">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdMaterial">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdMaterial">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       asp-route-namematerial="@(Model.FilterViewModel.SelectedNameMaterial)"
+       asp-route-massmaterial="@(Model.FilterViewModel.SelectedMassMaterial)"
+       asp-route-units="@(Model.FilterViewModel.SelectedUnits)"
+       asp-route-property="@(Model.FilterViewModel.SelectedProperty)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)" 
+       class="btn btn-default btn">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       asp-route-namematerial="@(Model.FilterViewModel.SelectedNameMaterial)"
+       asp-route-massmaterial="@(Model.FilterViewModel.SelectedMassMaterial)"
+       asp-route-units="@(Model.FilterViewModel.SelectedUnits)"
+       asp-route-property="@(Model.FilterViewModel.SelectedProperty)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)" 
+       class="btn btn-default btn">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}

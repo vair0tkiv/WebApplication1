@@ -1,0 +1,42 @@
+﻿@model WebApplication1.Supplies
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Supplies</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateSupple)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateSupple)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdMaterialNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdMaterialNavigation.IdMaterial)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProviderNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdProviderNavigation.IdProvider)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdSupple">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
